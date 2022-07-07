@@ -1,15 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './pages/Home';
 import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 
-import './App.css';
 // comecando mais
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       categories: [],
-
+      queryValue: '',
+      
     };
   }
 
@@ -26,26 +27,27 @@ class App extends React.Component {
     });
   }
 
-  handleSearch = async () => {
-    const result = await getProductsFromCategoryAndQuery('', 'computador');
+  handleSearch = async (categories,query) => {
+    const result = await getProductsFromCategoryAndQuery('', '');
     return result;
   }
 
+  onChange = ({target}) => {
+    const {name, value} = target
+    this.setState({
+      [name]:value
+    });
+  }
+
   render() {
+    const { queryValue } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={ logo } className="App-logo" alt="logo" />
-          <p>Edit src/App.js and save to reload.</p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <BrowserRouter>
+        <Switch>
+          <Route path='/' render={() => <Home queryValue={queryValue} onChange={this.onChange} />} exact/>
+        </Switch>
+        </BrowserRouter>
       </div>
     );
   }
