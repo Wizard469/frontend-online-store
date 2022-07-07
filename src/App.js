@@ -1,51 +1,66 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
-import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../src/services/api';
+
 
 // comecando mais
 class App extends React.Component {
-  constructor(props) {
+    constructor(props) {
     super(props);
     this.state = {
       categories: [],
       queryValue: '',
-      
+      search: [],
     };
   }
 
   componentDidMount() {
     this.setCategories();
-    this.handleSearch();
   }
+
+    setSearch = async (categories, query) => {
+      const search = await getProductsFromCategoryAndQuery(categories, query);
+      this.setState({
+        search: search.results,
+      });
+    }
 
   setCategories = async () => {
     const categories = await getCategories();
-
     this.setState({
       categories,
     });
   }
 
-  handleSearch = async (categories,query) => {
-    const result = await getProductsFromCategoryAndQuery('', '');
-    return result;
-  }
+    onChange = ({ target }) => {
+      const { name, value } = target;
+      this.setState({
+        [name]: value,
+      });
+    }
 
-  onChange = ({target}) => {
-    const {name, value} = target
-    this.setState({
-      [name]:value
-    });
-  }
+    onClick= async () => {
+      const { queryValue } = this.state;
+      await this.setSearch('', queryValue);
+      console.log('ok')
+      // });
+    }
 
   render() {
-    const { queryValue } = this.state;
+    const { queryValue, search } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
         <Switch>
-          <Route path='/' render={() => <Home queryValue={queryValue} onChange={this.onChange} />} exact/>
+          <Route path='/' render={() => <Home 
+          onChange={this.onChange} 
+          search={search} 
+          onClick={this.onClick} 
+          queryValue={queryValue}
+          exact
+          />}
+          />
         </Switch>
         </BrowserRouter>
       </div>
