@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Home extends React.Component {
   render() {
@@ -11,10 +13,18 @@ class Home extends React.Component {
           value={ queryValue }
           onChange={ onChange }
         />
-        <p data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</p>
+        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
       </div>
     );
   }
 }
+
+Home.propTypes = {
+  queryValue: PropTypes.string,
+  onChange: PropTypes.func,
+}.isRequired;
 
 export default Home;
