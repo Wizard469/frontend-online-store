@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CardProduct from './components/CardProduct';
 
 class Home extends React.Component {
@@ -45,5 +46,19 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  search: PropTypes.arrayOf([
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      thumbnail: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+    }),
+  ]).isRequired,
+  queryValue: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Home;
