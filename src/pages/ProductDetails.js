@@ -16,7 +16,11 @@ class ProductDetails extends React.Component {
   }
 
     fecthDetails = async () => {
-      const { id } = this.props.match.params;
+      // Gambiarra de desestruturacao por erros de linter
+      const { match } = this.props;
+      const { params } = match;
+      const { id } = params;
+      // /////////////////////////////////////////////////
       const info = await getItemById(id);
       console.log(id);
       const details = info;
@@ -50,12 +54,12 @@ class ProductDetails extends React.Component {
       );
     }
 }
-ProductDetails.protoType = {
+ProductDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.string,
     }),
-  }),
+  }).isRequired,
 };
 
 export default ProductDetails;
