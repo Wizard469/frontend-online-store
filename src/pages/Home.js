@@ -6,10 +6,10 @@ import CategoriesMenu from '../components/CategoriesMenu';
 
 class Home extends React.Component {
   render() {
-    const { search, queryValue, onChange, onClick } = this.props;
+    const { search, queryValue, onChange, onClick, setCategories } = this.props;
     return (
       <div>
-        <CategoriesMenu />
+        <CategoriesMenu setCategories={ setCategories } />
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
         <input
           data-testid="query-input"
@@ -62,6 +62,7 @@ Home.propTypes = {
   queryValue: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
+  setCategories: PropTypes.func.isRequired,
 };
 
 export default Home;

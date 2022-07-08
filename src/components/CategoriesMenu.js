@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class CategoriesMenu extends React.Component {
@@ -22,6 +23,7 @@ class CategoriesMenu extends React.Component {
 
     render() {
       const { catObj } = this.state;
+      const { setCategories } = this.props;
 
       return (
         <>
@@ -31,6 +33,8 @@ class CategoriesMenu extends React.Component {
                 type="button"
                 data-testid="category"
                 key={ id }
+                id={ id }
+                onClick={ setCategories }
               >
                 {name}
               </button>))
@@ -39,5 +43,8 @@ class CategoriesMenu extends React.Component {
       );
     }
 }
+CategoriesMenu.propTypes = {
+  setCategories: PropTypes.func.isRequired,
+};
 
 export default CategoriesMenu;
