@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Cart from './pages/Cart';
 // import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 import Home from './pages/Home';
 
@@ -28,6 +29,7 @@ class App extends React.Component {
   } */
 
   /* handleSearch = async (categories, query) => {
+  /* handleSearch = async (categories, query) => {
     const result = await getProductsFromCategoryAndQuery('', '');
     return result;
   } */
@@ -53,6 +55,7 @@ class App extends React.Component {
               />) }
               exact
             />
+            <Route path="/cart" component={ Cart } />
           </Switch>
         </BrowserRouter>
       </div>
