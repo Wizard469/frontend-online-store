@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Cart from './pages/Cart';
-import { getProductsFromCategoryAndQuery } from './services/api';
+import { getItemById, getProductsFromCategoryAndQuery } from './services/api';
 import Home from './pages/Home';
 
 class App extends React.Component {
@@ -10,6 +10,7 @@ class App extends React.Component {
     this.state = {
       queryValue: '',
       search: [],
+      productsCart: [],
     };
   }
 
@@ -37,8 +38,38 @@ class App extends React.Component {
       await this.setSearch('', queryValue);
     }
 
+    addItemsCart= async ({ target }) => {
+      const product = await getItemById(target.id);
+      const { title, price, thumbnail, id } = product;
+      const { productsCart } = this.state;
+
+      if (productsCart.some((item) => item.id === target.id)) {
+        const obj = productsCart.reduce((acc, curr) => {
+          if (curr.id === target.id) {
+            curr.quantity += 1;
+
+            return acc + curr;
+          } return acc + curr;
+        }, []);
+
+        this.setState({
+          productsCart: [...productsCart, obj],
+        });
+      } else {
+        this.setState({
+          productsCart: [...productsCart, {
+            id,
+            title,
+            price,
+            thumbnail,
+            quantity: 1,
+          }],
+        });
+      }
+    }
+
     render() {
-      const { queryValue, search } = this.state;
+      const { queryValue, search, productsCart } = this.state;
       return (
         <div className="App">
           <BrowserRouter>
@@ -52,10 +83,16 @@ class App extends React.Component {
                   onClick={ this.onClick }
                   queryValue={ queryValue }
                   setCategories={ this.setCategories }
+                  addItemsCart={ this.addItemsCart }
                 />) }
               />
+              <Route
+                path="/cart"
+                render={ () => (
+                  <Cart productsCart={ productsCart } />
+                ) }
+              />
             </Switch>
-            <Route path="/cart" component={ Cart } />
           </BrowserRouter>
         </div>
       );

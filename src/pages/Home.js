@@ -6,7 +6,12 @@ import CategoriesMenu from '../components/CategoriesMenu';
 
 class Home extends React.Component {
   render() {
-    const { search, queryValue, onChange, onClick, setCategories } = this.props;
+    const { search,
+      queryValue,
+      onChange,
+      onClick,
+      addItemsCart,
+      setCategories } = this.props;
     return (
       <div>
         <CategoriesMenu setCategories={ setCategories } />
@@ -38,9 +43,11 @@ class Home extends React.Component {
               data-testid="product"
             >
               <CardProduct
+                addItemsCart={ addItemsCart }
                 title={ product.title }
                 thumbnail={ product.thumbnail }
                 price={ product.price }
+                id={ product.id }
               />
             </div>
           ))
@@ -63,6 +70,7 @@ Home.propTypes = {
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   setCategories: PropTypes.func.isRequired,
+  addItemsCart: PropTypes.func.isRequired,
 };
 
 export default Home;
