@@ -4,63 +4,56 @@ import Cart from './pages/Cart';
 // import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 import Home from './pages/Home';
 
-// comecando mais
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // categories: [],
       queryValue: '',
-
+      search: [],
     };
   }
 
-  componentDidMount() {
-    this.setCategories();
-    this.handleSearch();
-  }
+    setSearch = async (categories, query) => {
+      const search = await getProductsFromCategoryAndQuery(categories, query);
+      this.setState({
+        search: search.results,
+      });
+    }
 
-  /* setCategories = async () => {
-    const categories = await getCategories();
+    onChange = ({ target }) => {
+      const { name, value } = target;
+      this.setState({
+        [name]: value,
+      });
+    }
 
-    this.setState({
-      categories,
-    });
-  } */
+    onClick= async () => {
+      const { queryValue } = this.state;
+      await this.setSearch('', queryValue);
+      console.log('ok');
+      // });
+    }
 
-  /* handleSearch = async (categories, query) => {
-  /* handleSearch = async (categories, query) => {
-    const result = await getProductsFromCategoryAndQuery('', '');
-    return result;
-  } */
-
-  onChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  render() {
-    const { queryValue } = this.state;
-    return (
-      <div className="App">
-        <BrowserRouter>
-          <Switch>
-            <Route
-              path="/"
-              render={ () => (<Home
-                queryValue={ queryValue }
-                onChange={ this.onChange }
-              />) }
-              exact
-            />
-            <Route path="/cart" component={ Cart } />
-          </Switch>
-        </BrowserRouter>
-      </div>
-    );
-  }
+    render() {
+      const { queryValue, search } = this.state;
+      return (
+        <div className="App">
+          <BrowserRouter>
+            <Switch>
+              <Route
+                path="/"
+                render={ () => (<Home
+                  onChange={ this.onChange }
+                  search={ search }
+                  onClick={ this.onClick }
+                  queryValue={ queryValue }
+                  exact
+                />) }
+              />
+            </Switch>
+          </BrowserRouter>
+        </div>
+      );
+    }
 }
-// projeto
 export default App;
