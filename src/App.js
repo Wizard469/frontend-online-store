@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Cart from './pages/Cart';
-// import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
+import { getProductsFromCategoryAndQuery } from './services/api';
 import Home from './pages/Home';
 
 class App extends React.Component {
@@ -30,8 +30,6 @@ class App extends React.Component {
     onClick= async () => {
       const { queryValue } = this.state;
       await this.setSearch('', queryValue);
-      console.log('ok');
-      // });
     }
 
     render() {
