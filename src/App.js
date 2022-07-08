@@ -1,16 +1,16 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 import Home from './pages/Home';
-import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 
 // comecando mais
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
+      // categories: [],
       queryValue: '',
-      
+
     };
   }
 
@@ -19,23 +19,23 @@ class App extends React.Component {
     this.handleSearch();
   }
 
-  setCategories = async () => {
+  /* setCategories = async () => {
     const categories = await getCategories();
 
     this.setState({
       categories,
     });
-  }
+  } */
 
-  handleSearch = async (categories,query) => {
+  /* handleSearch = async (categories, query) => {
     const result = await getProductsFromCategoryAndQuery('', '');
     return result;
-  }
+  } */
 
-  onChange = ({target}) => {
-    const {name, value} = target
+  onChange = ({ target }) => {
+    const { name, value } = target;
     this.setState({
-      [name]:value
+      [name]: value,
     });
   }
 
@@ -44,9 +44,16 @@ class App extends React.Component {
     return (
       <div className="App">
         <BrowserRouter>
-        <Switch>
-          <Route path='/' render={() => <Home queryValue={queryValue} onChange={this.onChange} />} exact/>
-        </Switch>
+          <Switch>
+            <Route
+              path="/"
+              render={ () => (<Home
+                queryValue={ queryValue }
+                onChange={ this.onChange }
+              />) }
+              exact
+            />
+          </Switch>
         </BrowserRouter>
       </div>
     );
