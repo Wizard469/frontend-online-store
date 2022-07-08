@@ -1,21 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
+import Cart from './pages/Cart';
 // import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
+import Home from './pages/Home';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // categories: [],
       queryValue: '',
       search: [],
     };
   }
-
-  // componentDidMount() {
-  //   this.setCategories();
-  // }
 
     setSearch = async (categories, query) => {
       const search = await getProductsFromCategoryAndQuery(categories, query);
@@ -23,13 +19,6 @@ class App extends React.Component {
         search: search.results,
       });
     }
-
-    // setCategories = async () => {
-    //   const categories = await getCategories();
-    //   this.setState({
-    //     categories,
-    //   });
-    // }
 
     onChange = ({ target }) => {
       const { name, value } = target;
@@ -67,5 +56,4 @@ class App extends React.Component {
       );
     }
 }
-// projeto
 export default App;
