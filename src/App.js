@@ -41,16 +41,17 @@ class App extends React.Component {
           <BrowserRouter>
             <Switch>
               <Route
+                exact
                 path="/"
                 render={ () => (<Home
                   onChange={ this.onChange }
                   search={ search }
                   onClick={ this.onClick }
                   queryValue={ queryValue }
-                  exact
                 />) }
               />
             </Switch>
+            <Route path="/cart" component={ Cart } />
           </BrowserRouter>
         </div>
       );
