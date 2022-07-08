@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import CategoriesMenu from '../components/CategoriesMenu';
 
 class Home extends React.Component {
   render() {
     const { queryValue, onChange } = this.props;
     return (
       <div>
+        <CategoriesMenu />
         <input
           type="text"
           name="queryValue"
