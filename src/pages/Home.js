@@ -15,7 +15,9 @@ class Home extends React.Component {
     return (
       <div>
         <CategoriesMenu setCategories={ setCategories } />
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <Link data-testid="shopping-cart-button" to="/cart">
+          <button type="button">Carrinho</button>
+        </Link>
         <input
           data-testid="query-input"
           type="text"

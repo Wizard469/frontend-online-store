@@ -12,10 +12,10 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.fecthDetails();
+    this.fetchDetails();
   }
 
-    fecthDetails = async () => {
+    fetchDetails = async () => {
       const { match: { params: { id } } } = this.props;
       const info = await getItemById(id);
       const details = info;
@@ -43,7 +43,7 @@ class ProductDetails extends React.Component {
             R$
             {resultObj.price}
           </h2>
-          <Link to="/cart">
+          <Link to="/cart" data-testid="shopping-cart-button">
             <button type="button">Voltar ao Carrinho</button>
           </Link>
         </>
