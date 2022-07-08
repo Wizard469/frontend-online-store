@@ -27,6 +27,11 @@ class App extends React.Component {
       });
     }
 
+    setCategories = async ({ target }) => {
+      await this.setSearch(target.id, '');
+      console.log('ok');
+    }
+
     onClick= async () => {
       const { queryValue } = this.state;
       await this.setSearch('', queryValue);
@@ -46,6 +51,7 @@ class App extends React.Component {
                   search={ search }
                   onClick={ this.onClick }
                   queryValue={ queryValue }
+                  setCategories={ this.setCategories }
                 />) }
               />
             </Switch>
