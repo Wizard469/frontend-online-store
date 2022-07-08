@@ -37,11 +37,13 @@ class Home extends React.Component {
               key={ product.id }
               data-testid="product"
             >
-              <CardProduct
-                title={ product.title }
-                thumbnail={ product.thumbnail }
-                price={ product.price }
-              />
+              <Link data-testid="product-detail-link" to={ `/carddetails/${product.id}` }>
+                <CardProduct
+                  title={ product.title }
+                  thumbnail={ product.thumbnail }
+                  price={ product.price }
+                />
+              </Link>
             </div>
           ))
         )}
