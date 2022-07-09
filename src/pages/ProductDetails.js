@@ -12,18 +12,14 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.fecthDetails();
+    this.fetchDetails();
   }
 
-    fecthDetails = async () => {
-      // Gambiarra de desestruturacao por erros de linter
-      const { match } = this.props;
-      const { params } = match;
-      const { id } = params;
-      // /////////////////////////////////////////////////
+    fetchDetails = async () => {
+      const { match: { params: { id } } } = this.props;
       const info = await getItemById(id);
-      console.log(id);
       const details = info;
+
       const resultObj = {
         name: details.title,
         price: details.price,
@@ -47,7 +43,7 @@ class ProductDetails extends React.Component {
             R$
             {resultObj.price}
           </h2>
-          <Link to="/cart">
+          <Link to="/cart" data-testid="shopping-cart-button">
             <button type="button">Voltar ao Carrinho</button>
           </Link>
         </>

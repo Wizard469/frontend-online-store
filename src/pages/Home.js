@@ -6,11 +6,18 @@ import CategoriesMenu from '../components/CategoriesMenu';
 
 class Home extends React.Component {
   render() {
-    const { search, queryValue, onChange, onClick, setCategories } = this.props;
+    const { search,
+      queryValue,
+      onChange,
+      onClick,
+      addItemsCart,
+      setCategories } = this.props;
     return (
       <div>
         <CategoriesMenu setCategories={ setCategories } />
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <Link data-testid="shopping-cart-button" to="/cart">
+          <button type="button">Carrinho</button>
+        </Link>
         <input
           data-testid="query-input"
           type="text"
@@ -37,11 +44,14 @@ class Home extends React.Component {
               key={ product.id }
               data-testid="product"
             >
+
               <Link data-testid="product-detail-link" to={ `/carddetails/${product.id}` }>
                 <CardProduct
                   title={ product.title }
                   thumbnail={ product.thumbnail }
+                  addItemsCart={ addItemsCart }
                   price={ product.price }
+                  id={ product.id }
                 />
               </Link>
             </div>
@@ -65,6 +75,7 @@ Home.propTypes = {
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   setCategories: PropTypes.func.isRequired,
+  addItemsCart: PropTypes.func.isRequired,
 };
 
 export default Home;
