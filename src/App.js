@@ -96,7 +96,10 @@ class App extends React.Component {
               <Route
                 path="/carddetails/:id"
                 exact
-                render={ (props) => <ProductDetails { ...props } /> }
+                render={ (props) => (<ProductDetails
+                  onclick={ this.addItemsCart }
+                  { ...props }
+                />) }
               />
             </Switch>
 

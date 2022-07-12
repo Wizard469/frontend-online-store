@@ -32,6 +32,7 @@ class ProductDetails extends React.Component {
 
     render() {
       const { resultObj } = this.state;
+      const { onclick, match: { params: { id } } } = this.props;
       return (
         <>
           <h1 data-testid="product-detail-name">
@@ -43,6 +44,14 @@ class ProductDetails extends React.Component {
             R$
             {resultObj.price}
           </h2>
+          <button
+            data-testid="product-detail-add-to-cart"
+            type="button"
+            onClick={ onclick }
+            id={ id }
+          >
+            Adicionar ao Carrinho
+          </button>
           <Link to="/cart" data-testid="shopping-cart-button">
             <button type="button">Voltar ao Carrinho</button>
           </Link>
@@ -56,6 +65,7 @@ ProductDetails.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
+  onclick: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;
